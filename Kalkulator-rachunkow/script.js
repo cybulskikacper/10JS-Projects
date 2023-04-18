@@ -8,25 +8,21 @@ const cost = document.querySelector('.cost')
 
 const showBill = () => {
 	if (people.value === '' || price.value === '' || tip.value === '') {
-		console.error('Błąd: Wprowadź prawidłowe dane.') //
+		error.textContent = 'Uzupełnij wszystkie pola!'
 	} else {
 		countBill()
 	}
 }
 
 const countBill = () => {
-	const priceInfo = parseFloat(price.value)
-	const tipInfo = parseFloat(tip.value) / 100
-	const personInfo = parseFloat(people.value)
+	const priceInfo = parseInt(price.value)
+	const tipInfo = parseInt(tip.value)
+	const personInfo = parseInt(people.value)
 
-	if (isNaN(priceInfo) || isNaN(tipInfo) || isNaN(personInfo)) {
-		console.error('Błąd: Wprowadź prawidłowe dane.') // Sprawdzenie, czy dane są liczbami
-		return
-	}
+	const sum = (priceInfo + priceInfo * tipInfo) / personInfo
+    costInfo.style.display = 'block '
 
-    
-
-
+	cost.textContent = sum.toFixed(2)
 }
 
 count.addEventListener('click', showBill)
