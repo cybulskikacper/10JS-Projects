@@ -7,7 +7,7 @@ const answers = ['Tak!', 'Nie.', 'Ciężko powiedzieć.', 'Nie chcesz znać odpo
 
 const animation = () => {
 	ball.classList.remove('shake-animation')
-	void ball.offsetWidth // Force reflow
+	void ball.offsetWidth 
 	ball.classList.add('shake-animation')
 	setTimeout(checkInput, 1000)
 }
