@@ -15,11 +15,12 @@ let countTime = 0
 let minutes = 0
 let seconds = 0
 let isRunning = false
+let intervalId
 
 const handleStart = () => {
 	if (!isRunning) {
 		isRunning = true
-		setInterval(() => {
+		intervalId = setInterval(() => {
 			seconds++
 			if (seconds >= 60) {
 				seconds = 0
@@ -33,4 +34,10 @@ const handleStart = () => {
 	}
 }
 
+const handlePause = () => {
+	clearInterval(intervalId)
+	isRunning = false
+}
+
 startBtn.addEventListener('click', handleStart)
+pauseBtn.addEventListener('click', handlePause)
