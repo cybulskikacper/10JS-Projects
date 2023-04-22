@@ -5,12 +5,20 @@ const error = document.querySelector('.error')
 
 const answers = ['Tak!', 'Nie.', 'Ciężko powiedzieć.', 'Nie chcesz znać odpowiedzi na to pytanie...:/']
 
+const animation = () => {
+	ball.classList.remove('shake-animation')
+	void ball.offsetWidth // Force reflow
+	ball.classList.add('shake-animation')
+	setTimeout(checkInput, 1000)
+}
+
 const checkInput = () => {
 	if (input.value !== '' && input.value.endsWith('?')) {
 		generateAnswer()
 		error.textContent = ''
 	} else if (!input.value == '' && !input.value.endsWith('?')) {
 		error.textContent = 'Pytanie musi być zakończone znakiem zapytania.'
+		answer.textContent = ''
 	} else {
 		error.textContent = 'Zadaj pytanie!'
 	}
@@ -22,4 +30,4 @@ const generateAnswer = () => {
 	answer.textContent = generatedAnswer
 }
 
-ball.addEventListener('click', checkInput)
+ball.addEventListener('click', animation)
