@@ -16,7 +16,7 @@ let seconds = 0
 let isRunning = false
 let intervalId
 
-const results = []
+let results  = []
 
 const handleStart = () => {
 	if (!isRunning) {
@@ -55,6 +55,7 @@ const handleStop = () => {
 
 const handleReset = () => {
 	time.style.visibility = 'hidden'
+    results = []
 	clearStuff()
 }
 
