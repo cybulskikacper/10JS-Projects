@@ -34,7 +34,7 @@ const handleStart = () => {
 				minutes = 0
 			}
 			stopWatch.textContent = `${minutes < 10 ? +minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`
-		}, 700)
+		}, 500)
 	}
 }
 
@@ -50,17 +50,21 @@ const handleStop = () => {
 		results.push(stopWatch.textContent)
 	}
 
+	clearStuff()
+}
+
+const handleReset = () => {
+	time.style.visibility = 'hidden'
+	clearStuff()
+}
+
+const clearStuff = () => {
 	clearInterval(intervalId)
 	stopWatch.textContent = '0:00'
 	timeList.textContent = ''
 	minutes = 0
 	seconds = 0
 	isRunning = false
-}
-
-const handleReset = () => {
-	minutes = 0
-	seconds = 0
 }
 
 startBtn.addEventListener('click', handleStart)
