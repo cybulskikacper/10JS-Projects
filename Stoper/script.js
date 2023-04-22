@@ -11,15 +11,19 @@ const timeList = document.querySelector('.time-list')
 const modalShadow = document.querySelector('.modal-shadow')
 const closeBtn = document.querySelector('.close')
 
-let countTime = 0
 let minutes = 0
 let seconds = 0
 let isRunning = false
 let intervalId
 
+const results = []
+
 const handleStart = () => {
 	if (!isRunning) {
 		isRunning = true
+		if (time.style.visibility === 'visible') {
+			time.style.visibility = 'hidden'
+		}
 		intervalId = setInterval(() => {
 			seconds++
 			if (seconds >= 60) {
@@ -30,7 +34,7 @@ const handleStart = () => {
 				minutes = 0
 			}
 			stopWatch.textContent = `${minutes < 10 ? +minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`
-		}, 1000)
+		}, 700)
 	}
 }
 
@@ -39,5 +43,31 @@ const handlePause = () => {
 	isRunning = false
 }
 
+const handleStop = () => {
+	if (stopWatch.textContent !== '0:00') {
+		time.style.visibility = 'visible'
+		time.innerHTML = `Ostatni czas to: ${stopWatch.textContent}`
+		results.push(stopWatch.textContent)
+	}
+
+	clearInterval(intervalId)
+	stopWatch.textContent = '0:00'
+	timeList.textContent = ''
+	minutes = 0
+	seconds = 0
+	isRunning = false
+}
+
+const handleReset = () => {
+	minutes = 0
+	seconds = 0
+}
+
 startBtn.addEventListener('click', handleStart)
 pauseBtn.addEventListener('click', handlePause)
+stopBtn.addEventListener('click', handleStop)
+resetBtn.addEventListener('click', handleReset)
+
+historyBtn.addEventListener('click', () => {
+	console.log(results)
+})
