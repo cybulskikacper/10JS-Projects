@@ -67,11 +67,15 @@ const clearStuff = () => {
 	isRunning = false
 }
 
+const showHistory = () =>
+	results.forEach((time, index) => {
+		const newTime = document.createElement('li')
+		newTime.innerHTML = `Pomiar nr ${index + 1}: <span>${time}</span>`
+		timeList.append(newTime)
+	})
+
 startBtn.addEventListener('click', handleStart)
 pauseBtn.addEventListener('click', handlePause)
 stopBtn.addEventListener('click', handleStop)
 resetBtn.addEventListener('click', handleReset)
-
-historyBtn.addEventListener('click', () => {
-	console.log(results)
-})
+historyBtn.addEventListener('click', showHistory)
