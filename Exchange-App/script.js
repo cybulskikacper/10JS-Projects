@@ -11,12 +11,20 @@ const calculate = () => {
 	fetch(URL)
 		.then(response => response.json())
 		.then(data => {
-			const currency1 = currencyOne.value
-			const currency2 = currencyTwo.value
+			if (data && data.info.rate) {
+				const currency1 = currencyOne.value
+				const currency2 = currencyTwo.value
+				const exchangeRate = data.info.rate
+				rateInfo.textContent = `1 ${currency1} = ${exchangeRate.toFixed(4)}${currency2}`
 
-			const rate = data.rates[currency2]
-			rateInfo.textContent = `1 ${currency1} = ${rate}${currency2}`
+				amountTwo.value = amountOne.value * exchangeRate.toFixed(2)
+			}
 		})
+		.catch(error => console.error(error))
 }
+
+currencyOne.addEventListener('change', calculate)
+currencyTwo.addEventListener('change', calculate)
+amountOne.addEventListener('input',calculate)
 
 calculate()
