@@ -17,14 +17,25 @@ const calculate = () => {
 				const exchangeRate = data.info.rate
 				rateInfo.textContent = `1 ${currency1} = ${exchangeRate.toFixed(4)}${currency2}`
 
-				amountTwo.value = amountOne.value * exchangeRate.toFixed(2)
+				amountTwo.value = amountOne.value * exchangeRate.toFixed(4)
 			}
 		})
 		.catch(error => console.error(error))
 }
 
+const swapAmounts = () => {
+	const temp = amountOne.value
+	amountOne.value = amountTwo.value
+	amountTwo.value = temp
+
+	const tempCurrency = currencyOne.value
+	currencyOne.value = currencyTwo.value
+	currencyTwo.value = tempCurrency
+}
+
 currencyOne.addEventListener('change', calculate)
 currencyTwo.addEventListener('change', calculate)
-amountOne.addEventListener('input',calculate)
+amountOne.addEventListener('input', calculate)
+swapBtn.addEventListener('click', swapAmounts)
 
 calculate()
