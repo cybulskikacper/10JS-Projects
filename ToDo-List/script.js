@@ -83,16 +83,23 @@ const createToolsArea = () => {
 const checkClick = e => {
 	if (e.target.classList.value !== '') {
 		if (e.target.closest('button').classList.contains('complete')) {
-
 			e.target.closest('li').classList.toggle('completed')
 			e.target.closest('button').classList.toggle('completed')
-
 		} else if (e.target.closest('button').classList.contains('edit')) {
 			console.log('edit')
 		} else if (e.target.closest('button').classList.contains('delete')) {
-			console.log('delete')
+			deleteTask(e)
 		}
 	}
+}
+
+const deleteTask = e => {
+	const deleteToDo = e.target.closest('li')
+    deleteToDo.remove()
+
+    if($allTasks.length === 0 ) { 
+        $alertInfo.innerText = 'Brak zadań na liście'
+    }
 }
 
 document.addEventListener('DOMContentLoaded', main)
