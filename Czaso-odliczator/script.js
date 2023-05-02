@@ -19,14 +19,25 @@ let userTime
 
 const setTime = () => {
 	const currentTime = new Date()
+	const result = userTime - currentTime
+
+	const days = Math.floor(result / 1000 / 60 / 60 / 24)
+	const hours = Math.floor(result / 1000 / 60 / 60) % 24
+	const minutes = Math.floor(result / 1000 / 60) % 60
+	const seconds = Math.floor(result / 1000) % 60
+
+	daysCount.textContent = days
+	hoursCount.textContent = hours
+	minutesCount.textContent = minutes
+	secondsCount.textContent = seconds
 }
 
 const appUpdate = () => {
 	eventSpan.textContent = eventName.value
 	userTime = new Date(`${eventMonth.value} ${eventDay.value} ${eventYear.value}`)
-	console.log(userTime)
-
 	imageSection.style.backgroundImage = `url(${eventImage.value})`
+	setTime()
+	setInterval(setTime, 1000)
 }
 
 settingsBtn.addEventListener('click', () => {
@@ -34,3 +45,5 @@ settingsBtn.addEventListener('click', () => {
 })
 
 saveBtn.addEventListener('click', appUpdate)
+appUpdate()
+setInterval(setTime, 1000)
