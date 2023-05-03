@@ -29,8 +29,11 @@ const checkForm = input => {
 	})
 }
 
-
-
+const checkPassword = () => {
+	if (pass.value !== pass2.value) {
+		showError(pass2, 'Hasła do siebie nie pasują.')
+	}
+}
 
 const checkLength = (input, min) => {
 	if (input.value.length < min) {
@@ -43,6 +46,7 @@ sendBtn.addEventListener('click', e => {
 	checkForm([username, pass, pass2, email])
 	checkLength(username, 3)
 	checkLength(pass, 8)
+	checkPassword(pass,pass2)
 })
 
 clearBtn.addEventListener('click', e => {
