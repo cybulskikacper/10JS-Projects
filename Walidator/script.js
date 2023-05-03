@@ -11,7 +11,7 @@ const showError = (input, msg) => {
 	const errorMsg = formBox.querySelector('.error-text')
 
 	formBox.classList.add('error')
-	errorMsg.textContent = msg
+	errorMsg.textContent = msg.slice(0)
 }
 
 const clearError = input => {
@@ -29,9 +29,20 @@ const checkForm = input => {
 	})
 }
 
+
+
+
+const checkLength = (input, min) => {
+	if (input.value.length < min) {
+		showError(input, `${input.previousElementSibling.innerText.slice(0, -1)} składa się z min. ${min} znaków`)
+	}
+}
+
 sendBtn.addEventListener('click', e => {
 	e.preventDefault()
 	checkForm([username, pass, pass2, email])
+	checkLength(username, 3)
+	checkLength(pass, 8)
 })
 
 clearBtn.addEventListener('click', e => {
