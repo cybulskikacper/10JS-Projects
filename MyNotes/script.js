@@ -40,7 +40,7 @@ const createNote = () => {
 
 	newNote.innerHTML = `<div class="note-header">
     <h3 class="note-title">${selectedValue}</h3>
-    <button class="delete-note">
+    <button class="delete-note" onclick="deleteNote(${cardID})">
         <i class="fas fa-times icon"></i>
     </button>
 </div>
@@ -53,7 +53,7 @@ const createNote = () => {
 	textArea.value = ''
 	category.selectedIndex = 0
 	notePanel.style.display = 'none'
-    checkColor(newNote)
+	checkColor(newNote)
 }
 
 const selectValue = () => {
@@ -70,10 +70,21 @@ const checkColor = note => {
 			break
 		case 'Inne':
 			note.style.backgroundColor = 'rgb(0,170,255)'
-            break
+			break
 	}
 }
 
+const deleteNote = id => {
+	const noteToDelete = document.getElementById(id)
+	noteArea.removeChild(noteToDelete)
+}
+
+const deleteAllNotes = () => {
+    
+
+    noteArea.textContent =''
+}
 addBtn.addEventListener('click', openPanel)
 saveBtn.addEventListener('click', addNote)
 cancelBtn.addEventListener('click', closePanel)
+deleteAllBtn.addEventListener('click', deleteAllNotes)
